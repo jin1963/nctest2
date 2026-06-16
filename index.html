@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>New Currency Trading</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+<script src="config.js"></script>
+
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+
+  <aside class="sidebar">
+
+```
+<div class="brand">
+
+  <div class="logo">
+    NC
+  </div>
+
+  <h2>New Currency</h2>
+
+  <p>
+    Trading Platform
+  </p>
+
+</div>
+
+<div class="menu">
+
+  <button onclick="showPage('dashboard')">
+    Dashboard
+  </button>
+
+  <button onclick="showPage('package')">
+    Buy Package
+  </button>
+
+  <button onclick="showPage('vault')">
+    Vault Earnings
+  </button>
+
+  <button onclick="showPage('staking')">
+    My Staking
+  </button>
+
+  <button onclick="showPage('binary')">
+    Binary Team
+  </button>
+
+  <button onclick="showPage('referral')">
+    Referral
+  </button>
+
+</div>
+```
+
+  </aside>
+
+  <!-- Main -->
+
+  <div class="main">
+
+```
+<!-- Header -->
+
+<div class="topbar">
+
+  <div>
+
+    <h1>
+      New Currency Trading
+    </h1>
+
+    <div class="sub">
+      BNB Smart Chain
+    </div>
+
+  </div>
+
+  <div class="wallet-box">
+
+    <span id="walletAddress">
+      Wallet Not Connected
+    </span>
+
+    <button
+      id="connectBtn"
+      onclick="connectWallet()">
+
+      Connect Wallet
+
+    </button>
+
+  </div>
+
+</div>
+
+<!-- Dashboard -->
+
+<section
+  id="dashboard"
+  class="page active">
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="title">
+        USDT Balance
+      </div>
+
+      <div
+        id="usdtBalance"
+        class="value">
+
+        0
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="title">
+        NC Balance
+      </div>
+
+      <div
+        id="ncBalance"
+        class="value">
+
+        0
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="title">
+        Current Package
+      </div>
+
+      <div
+        id="myPackage"
+        class="value">
+
+        None
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="title">
+        Rank
+      </div>
+
+      <div
+        id="myRank"
+        class="value">
+
+        None
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="title">
+        Direct Members
+      </div>
+
+      <div
+        id="myDirects"
+        class="value">
+
+        0
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="title">
+        Left Volume
+      </div>
+
+      <div
+        id="leftVol"
+        class="value">
+
+        0
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="title">
+        Right Volume
+      </div>
+
+      <div
+        id="rightVol"
+        class="value">
+
+        0
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="title">
+        Pair Volume
+      </div>
+
+      <div
+        id="pairVol"
+        class="value">
+
+        0
+
+      </div>
+
+    </div>
+
+  </div>
+```
+```
+  <!-- Buy Package -->
+
+  <section
+    id="package"
+    class="page">
+
+    <h2>
+      Buy Package
+    </h2>
+
+    <div class="buy-form">
+
+      <div class="input-group">
+
+        <label>
+          Sponsor Address
+        </label>
+
+        <input
+          id="sponsorInput"
+          placeholder="0x..." />
+
+      </div>
+
+      <div class="input-group">
+
+        <label>
+          Placement Side
+        </label>
+
+        <select id="sideInput">
+
+          <option value="false">
+            Left
+          </option>
+
+          <option value="true">
+            Right
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="packages">
+
+      <div class="package-card">
+
+        <h3>
+          Small
+        </h3>
+
+        <div class="price">
+          100 USDT
+        </div>
+
+        <div
+          id="smallNC"
+          class="token">
+
+          10,000 NC
+
+        </div>
+
+        <button
+          onclick="approveUSDT(1)">
+
+          Approve
+
+        </button>
+
+        <button
+          class="buy-btn"
+          onclick="buyPackage(1)">
+
+          Buy Small
+
+        </button>
+
+      </div>
+
+      <div class="package-card">
+
+        <h3>
+          Medium
+        </h3>
+
+        <div class="price">
+          500 USDT
+        </div>
+
+        <div
+          id="mediumNC"
+          class="token">
+
+          60,000 NC
+
+        </div>
+
+        <button
+          onclick="approveUSDT(2)">
+
+          Approve
+
+        </button>
+
+        <button
+          class="buy-btn"
+          onclick="buyPackage(2)">
+
+          Buy Medium
+
+        </button>
+
+      </div>
+
+      <div class="package-card">
+
+        <h3>
+          Large
+        </h3>
+
+        <div class="price">
+          1000 USDT
+        </div>
+
+        <div
+          id="largeNC"
+          class="token">
+
+          130,000 NC
+
+        </div>
+
+        <button
+          onclick="approveUSDT(3)">
+
+          Approve
+
+        </button>
+
+        <button
+          class="buy-btn"
+          onclick="buyPackage(3)">
+
+          Buy Large
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      id="txStatus"
+      class="status-box">
+
+    </div>
+
+  </section>
+
+  <!-- Vault -->
+
+  <section
+    id="vault"
+    class="page">
+
+    <h2>
+      Vault Earnings
+    </h2>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <div class="title">
+          Claimable USDT
+        </div>
+
+        <div
+          id="claimUSDT"
+          class="value">
+
+          0
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="title">
+          Claimable NC
+        </div>
+
+        <div
+          id="claimNC"
+          class="value">
+
+          0
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <button
+      class="claim-btn"
+      onclick="claimVault()">
+
+      Claim Vault
+
+    </button>
+
+  </section>
+
+  <!-- Referral -->
+
+  <section
+    id="referral"
+    class="page">
+
+    <h2>
+      Referral Center
+    </h2>
+
+    <div class="ref-box">
+
+      <label>
+        Referral Link
+      </label>
+
+      <input
+        id="refLink"
+        readonly>
+
+      <button
+        onclick="copyReferral()">
+
+        Copy Link
+
+      </button>
+
+    </div>
+
+    <br>
+
+    <div class="ref-box">
+
+      <label>
+        Left Link
+      </label>
+
+      <input
+        id="leftRefLink"
+        readonly>
+
+    </div>
+
+    <br>
+
+    <div class="ref-box">
+
+      <label>
+        Right Link
+      </label>
+
+      <input
+        id="rightRefLink"
+        readonly>
+
+    </div>
+
+  </section>
+```
+```
+  <!-- Staking -->
+
+  <section
+    id="staking"
+    class="page">
+
+    <h2>
+      My Staking
+    </h2>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <div class="title">
+          Active Stake
+        </div>
+
+        <div
+          id="activeStake"
+          class="value">
+
+          0 NC
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="title">
+          Pending Reward
+        </div>
+
+        <div
+          id="pendingRewardTotal"
+          class="value">
+
+          0 NC
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="title">
+          Matured Stake
+        </div>
+
+        <div
+          id="maturedStake"
+          class="value">
+
+          0 NC
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="title">
+          Countdown
+        </div>
+
+        <div
+          id="nextCountdown"
+          class="value">
+
+          --
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <br>
+
+    <button
+      class="claim-btn"
+      onclick="claimAllMatured()">
+
+      Claim All Matured
+
+    </button>
+
+    <br><br>
+
+    <div id="stakeList">
+
+    </div>
+
+  </section>
+
+  <!-- Binary -->
+
+  <section
+    id="binary"
+    class="page">
+
+    <h2>
+      Binary Team
+    </h2>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <div class="title">
+          Left Volume
+        </div>
+
+        <div
+          id="binaryLeft"
+          class="value">
+
+          0
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="title">
+          Right Volume
+        </div>
+
+        <div
+          id="binaryRight"
+          class="value">
+
+          0
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="title">
+          Pair Volume
+        </div>
+
+        <div
+          id="binaryPair"
+          class="value">
+
+          0
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+      <h3>
+        Team Information
+      </h3>
+
+      <div id="teamContainer">
+
+        Loading...
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<!-- Main End -->
+```
+
+  </div>
+
+  <!-- App End -->
+
+  <footer class="footer">
+
+```
+<div>
+  New Currency Trading
+</div>
+
+<div>
+  NC Ecosystem • BNB Smart Chain
+</div>
+```
+
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
