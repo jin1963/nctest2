@@ -472,4 +472,4 @@ setInterval(() => {
   if (account) {
     loadStakes();
   }
-}, 40000);
+}, 60000);
