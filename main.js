@@ -206,9 +206,7 @@ async function copyRightReferral() {
 
     const vol = await binary.volumesOf(account);
 
-    document.getElementById("leftVol").innerText = fmt(vol.l) + " USDT";
-    document.getElementById("rightVol").innerText = fmt(vol.r) + " USDT";
-    document.getElementById("pairVol").innerText = fmt(vol.p) + " USDT";
+    
 
     await loadStakes();
 
